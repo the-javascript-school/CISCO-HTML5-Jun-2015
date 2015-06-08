@@ -12,8 +12,6 @@
     </style>
     <script>
         window.addEventListener("DOMContentLoaded", init);
-        window.addEventListener("storage", initList);
-
         var olTaskList = null;
         function init(){
             olTaskList = document.getElementById("olTaskList");
@@ -21,21 +19,18 @@
                 .addEventListener("click", onBtnAddTaskClick);
             document.getElementById("btnRemoveCompleted")
                 .addEventListener("click", onBtnRemoveCompletedClick);
-            initList();
-        }
-        function initList(){
-            olTaskList.innerHTML = '';
-            for(var i=0; i<localStorage.length; i++){
-                var id = localStorage.key(i);
-                var name = localStorage.getItem(id);
+            for(var i=0; i<sessionStorage.length; i++){
+                var id = sessionStorage.key(i);
+                var name = sessionStorage.getItem(id);
                 addTaskToList(id, name);
             }
+
 
         }
         function onBtnAddTaskClick(){
             var taskName = document.getElementById("txtTask").value;
             var newId = new Date().getTime().toString();
-            localStorage.setItem(newId, taskName);
+            sessionStorage.setItem(newId, taskName);
             addTaskToList(newId, taskName);
         }
 
@@ -55,7 +50,7 @@
                 var taskItem = olTaskList.children[i];
                 if (taskItem.classList.contains("completed")){
                     var id = taskItem.getAttribute("taskId");
-                    localStorage.removeItem(id);
+                    sessionStorage.removeItem(id);
                     taskItem.remove();
                 }
             }

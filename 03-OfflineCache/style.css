@@ -1,0 +1,12 @@
+h1{
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    padding: 10px;
+}
+.completed{
+    color : red;
+    text-decoration: line-through;
+    font-style: italic;
+}
