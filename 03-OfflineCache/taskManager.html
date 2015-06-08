@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-online.css">
     <script src="taskManager.js"></script>
+    <script>
+    window.applicationCache.onupdateready = function(){
+        var agree = confirm("A new version of the app is in the cache. Do youy want to use it?");
+        if (agree) window.location.reload();
+    };
+    </script>
 </head>
 <body>
-    <h1>Task Manager</h1>
+    <h1>Task Manager - Ver 3.0</h1>
     <label for="">Task :</label>
     <input type="text" name="" id="txtTask">
     <input type="button" value="Add Task" id="btnAdd">
