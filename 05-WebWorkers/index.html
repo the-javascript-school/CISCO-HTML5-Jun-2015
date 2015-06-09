@@ -12,11 +12,17 @@
             worker.addEventListener("message", onMessageFromWorker);
         }
         function onMessageFromWorker(evtArg){
-            displayMessage("Message from worker = " + evtArg.data);
+            if (evtArg.data.type === "completion"){
+                displayMessage("Work Completed");
+            } else if (evtArg.data.type === "progress"){
+                document.getElementById("workProgress").value = evtArg.data.percentCompleted;
+            }
         }
         function onBtnDoWorkClick(){
             displayMessage("Work Started");
-            worker.postMessage("Hi there");
+            worker.postMessage({
+                type : "start"
+            });
         }
         function displayMessage(msg){
             document.getElementById("divMessages").innerHTML += msg + "<br/>"
@@ -27,6 +33,6 @@
     <input type="text" name="" id="">
     <input type="button" value="Do Work" id="btnDoWork">
     <div id="divMessages"></div>
-
+    <progress id="workProgress" min="0" max="100" value="0"></progress>
 </body>
 </html>
