@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Server Sent events demo</title>
+    <script>
+        window.addEventListener("DOMContentLoaded", init);
+        var eventSource = null;
+        function init(){
+            document.getElementById("btnStart").addEventListener("click", onBtnStartClick);
+        }
+        function onBtnStartClick(){
+            var eventSource = new EventSource("/events");
+            eventSource.addEventListener("timeStamp", onTimeStamp);
+        }
+        function onTimeStamp(evtArg){
+            document.getElementById("divMessages").innerHTML += evtArg.data + "<br/>";
+        }
+    </script>
 </head>
 <body>
     <input type="button" value="Start" id="btnStart">
