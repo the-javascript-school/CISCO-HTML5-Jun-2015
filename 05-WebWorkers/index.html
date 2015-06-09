@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browser Scheduler</title>
+    <script>
+        window.addEventListener("DOMContentLoaded", init);
+        function init(){
+            document.getElementById("btnDoWork").addEventListener("click", onBtnDoWorkClick);
+        }
+        function onBtnDoWorkClick(){
+            displayMessage("Work Started");
+            worker = new Worker("complexWorker.js");
+        }
+        function displayMessage(msg){
+            document.getElementById("divMessages").innerHTML += msg + "<br/>"
+        }
+    </script>
+</head>
+<body>
+    <input type="text" name="" id="">
+    <input type="button" value="Do Work" id="btnDoWork">
+    <div id="divMessages"></div>
+
+</body>
+</html>
