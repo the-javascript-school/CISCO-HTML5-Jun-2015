@@ -5,12 +5,18 @@
     <title>Browser Scheduler</title>
     <script>
         window.addEventListener("DOMContentLoaded", init);
+        var worker = null;
         function init(){
             document.getElementById("btnDoWork").addEventListener("click", onBtnDoWorkClick);
+            worker = new Worker("complexWorker.js");
+            worker.addEventListener("message", onMessageFromWorker);
+        }
+        function onMessageFromWorker(evtArg){
+            displayMessage("Message from worker = " + evtArg.data);
         }
         function onBtnDoWorkClick(){
             displayMessage("Work Started");
-            worker = new Worker("complexWorker.js");
+            worker.postMessage("Hi there");
         }
         function displayMessage(msg){
             document.getElementById("divMessages").innerHTML += msg + "<br/>"

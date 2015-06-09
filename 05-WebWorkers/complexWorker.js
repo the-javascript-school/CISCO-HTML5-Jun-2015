@@ -4,4 +4,8 @@ function doWork(onComplete, onProgress){
             for(var k=0; k<100; k++)
             {}
 }
-doWork();
+//doWork();
+self.addEventListener("message", function(evtArg){
+    console.log("Message from main - ", evtArg.data);
+    self.postMessage("Thanks for the message");
+})
